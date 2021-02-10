@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<o:Table Id="o130">
+<a:ObjectID>97CEB1D8-0C56-4D66-8485-4EE3E4509A92</a:ObjectID>
+<a:Name>组织架构</a:Name>
+<a:Code>BASE_STRU</a:Code>
+<a:CreationDate>1506218358</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507532657</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:TotalSavingCurrency/>
+<c:Columns>
+<o:Column Id="o288">
+<a:ObjectID>8507722E-BAC3-4C3E-9F37-67437EA31E56</a:ObjectID>
+<a:Name>主键</a:Name>
+<a:Code>ID</a:Code>
+<a:CreationDate>1506218369</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507532657</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:DataType>int</a:DataType>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o289">
+<a:ObjectID>44E15420-2B81-425D-A4BF-EB2C062572D5</a:ObjectID>
+<a:Name>编码</a:Name>
+<a:Code>STRU_CODE</a:Code>
+<a:CreationDate>1506218567</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507951595</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:DataType>varchar(32)</a:DataType>
+<a:Length>32</a:Length>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o290">
+<a:ObjectID>07DDC14F-89CD-41C8-8639-136EB27449B1</a:ObjectID>
+<a:Name>名称</a:Name>
+<a:Code>STRU_NAME</a:Code>
+<a:CreationDate>1506218369</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507951595</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:DataType>varchar(40)</a:DataType>
+<a:Length>40</a:Length>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o291">
+<a:ObjectID>E8C12756-1247-4A03-975B-BA79418488DC</a:ObjectID>
+<a:Name>类型</a:Name>
+<a:Code>TYPE</a:Code>
+<a:CreationDate>1506218509</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507951595</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:Comment>COMP:公司,DEP:部门,USER:人员</a:Comment>
+<a:DataType>varchar(10)</a:DataType>
+<a:Length>10</a:Length>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o292">
+<a:ObjectID>D142C3F9-3D8D-48D6-9365-7DBA15B657EA</a:ObjectID>
+<a:Name>是否生效</a:Name>
+<a:Code>IS_MRB</a:Code>
+<a:CreationDate>1506218814</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507951595</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:Comment>UNACTIVE:失效,ACTIVE:生效</a:Comment>
+<a:DataType>varchar(10)</a:DataType>
+<a:Length>10</a:Length>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o293">
+<a:ObjectID>B87B2AFD-95A4-42D0-9383-4BEDF39774CB</a:ObjectID>
+<a:Name>上级ID</a:Name>
+<a:Code>PARENT_ID</a:Code>
+<a:CreationDate>1506218509</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1542273178</a:ModificationDate>
+<a:Modifier>secon</a:Modifier>
+<a:DataType>INT</a:DataType>
+</o:Column>
+<o:Column Id="o294">
+<a:ObjectID>B217DE6B-DA17-442B-86CE-190B35484B93</a:ObjectID>
+<a:Name>创建人</a:Name>
+<a:Code>CREATE_BY</a:Code>
+<a:CreationDate>1506218567</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507951595</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:DataType>int</a:DataType>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o295">
+<a:ObjectID>4A48386E-30D9-4DD1-9E89-A46EC8D39357</a:ObjectID>
+<a:Name>创建日期</a:Name>
+<a:Code>CREATE_DATE</a:Code>
+<a:CreationDate>1506218567</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507951595</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:DataType>varchar(8)</a:DataType>
+<a:Length>8</a:Length>
+<a:Mandatory>1</a:Mandatory>
+</o:Column>
+<o:Column Id="o296">
+<a:ObjectID>9B49A101-D365-4197-8F6B-7FFB50E9D2C0</a:ObjectID>
+<a:Name>备注</a:Name>
+<a:Code>REMARK</a:Code>
+<a:CreationDate>1506218567</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507532657</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<a:DataType>varchar(64)</a:DataType>
+<a:Length>64</a:Length>
+</o:Column>
+</c:Columns>
+<c:Keys>
+<o:Key Id="o297">
+<a:ObjectID>76525853-7C1A-4333-BD6A-1C451B8DA240</a:ObjectID>
+<a:Name>Key_1</a:Name>
+<a:Code>Key_1</a:Code>
+<a:CreationDate>1506218448</a:CreationDate>
+<a:Creator>jk</a:Creator>
+<a:ModificationDate>1507532657</a:ModificationDate>
+<a:Modifier>jk</a:Modifier>
+<c:Key.Columns>
+<o:Column Ref="o288"/>
+</c:Key.Columns>
+</o:Key>
+</c:Keys>
+<c:PrimaryKey>
+<o:Key Ref="o297"/>
+</c:PrimaryKey>
+</o:Table>
