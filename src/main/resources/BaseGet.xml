@@ -1,0 +1,115 @@
+<Task name="BaseGet">
+    <Params>
+        <Param name="TaskUDHeight" datatype="double" default="" desc="取放货下降或上升高度" type="Input"/>
+        <Param name="ForkLiftUpPoint" datatype="int" default="" desc="货叉升起前要达到的点" type="Input"/>
+        <Param name="StorePoint" datatype="int" default="" desc="取放货库位点" type="Input"/>
+        <Param name="TaskHeight" datatype="double" default="" desc="货位高度" type="Input"/>
+        <Param name="Width" datatype="double" default="" desc="货架宽度" type="Input"/>
+        <Param name="ForkLiftBackPoint" datatype="int" default="" desc="取放货完成退回点" type="Input"/>
+    </Params>
+    <Steps>
+        <Step name="前倾" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="ForkPit_Control"/>
+            <Input name="datatype" value="INT"/>
+            <Input name="value" value="1"/>
+        </Step>
+        <Step name="上升" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="lift_sv"/>
+            <Input name="datatype" value="REAL"/>
+            <Input name="value" value="TaskHeight"/>
+        </Step>
+        <Step name="SET_VAR_0" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="lift_task"/>
+            <Input name="datatype" value="BYTE"/>
+            <Input name="value" value="1"/>
+        </Step>
+        <Step name="CHECK_VAR_0" type="CHECK_VAR" key="" timeout="0">
+            <Input name="name" value="lift_state"/>
+            <Input name="datatype" value="BYTE"/>
+            <Input name="expect_value" value="0"/>
+            <Input name="recycle_time" value="50"/>
+            <Output name="value" value=""/>
+        </Step>
+        <Step name="MOVE_0" type="MOVE" key="" timeout="0">
+            <Input name="goal_id" value="StorePoint"/>
+            <Input name="pause_at_first_point" value=""/>
+            <Input name="pause_at_last_point" value=""/>
+            <Output name="distance" value=""/>
+            <Output name="distance_to_goal" value=""/>
+            <Output name="pass_point" value=""/>
+            <Output name="pass_point_to_goal" value=""/>
+        </Step>
+        <Step name="前伸" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="Fork_FB_Control"/>
+            <Input name="datatype" value="INT"/>
+            <Input name="value" value="1"/>
+        </Step>
+        <Step name="CHECK_VAR_2" type="CHECK_VAR" key="" timeout="0">
+            <Input name="name" value="Fork_FB_Control"/>
+            <Input name="datatype" value="INT"/>
+            <Input name="expect_value" value="0"/>
+            <Input name="recycle_time" value="50"/>
+            <Output name="value" value=""/>
+        </Step>
+        <Step name="上升+0.15" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="lift_sv"/>
+            <Input name="datatype" value="REAL"/>
+            <Input name="value" value="TaskUDHeight"/>
+        </Step>
+        <Step name="SET_VAR_1" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="lift_task"/>
+            <Input name="datatype" value="BYTE"/>
+            <Input name="value" value="1"/>
+        </Step>
+        <Step name="CHECK_VAR_1" type="CHECK_VAR" key="" timeout="0">
+            <Input name="name" value="lift_state"/>
+            <Input name="datatype" value="BYTE"/>
+            <Input name="expect_value" value="0"/>
+            <Input name="recycle_time" value="50"/>
+            <Output name="value" value=""/>
+        </Step>
+        <Step name="后仰" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="ForkPit_Control"/>
+            <Input name="datatype" value="INT"/>
+            <Input name="value" value="-1"/>
+        </Step>
+        <Step name="后缩" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="Fork_FB_Control"/>
+            <Input name="datatype" value="INT"/>
+            <Input name="value" value="-1"/>
+        </Step>
+        <Step name="MOVE_1" type="MOVE" key="" timeout="0">
+            <Input name="goal_id" value="ForkLiftBackPoint"/>
+            <Input name="pause_at_first_point" value=""/>
+            <Input name="pause_at_last_point" value=""/>
+            <Output name="distance" value=""/>
+            <Output name="distance_to_goal" value=""/>
+            <Output name="pass_point" value=""/>
+            <Output name="pass_point_to_goal" value=""/>
+        </Step>
+        <Step name="CHECK_VAR_4" type="CHECK_VAR" key="" timeout="0">
+            <Input name="name" value="Fork_FB_Control"/>
+            <Input name="datatype" value="INT"/>
+            <Input name="expect_value" value="0"/>
+            <Input name="recycle_time" value="50"/>
+            <Output name="value" value=""/>
+        </Step>
+        <Step name="下降至带货高度" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="lift_sv"/>
+            <Input name="datatype" value="REAL"/>
+            <Input name="value" value="0.5"/>
+        </Step>
+        <Step name="SET_VAR_4" type="SET_VAR" key="" timeout="0">
+            <Input name="name" value="lift_task"/>
+            <Input name="datatype" value="BYTE"/>
+            <Input name="value" value="1"/>
+        </Step>
+        <Step name="CHECK_VAR_5" type="CHECK_VAR" key="" timeout="0">
+            <Input name="name" value="lift_state"/>
+            <Input name="datatype" value="BYTE"/>
+            <Input name="expect_value" value="0"/>
+            <Input name="recycle_time" value="50"/>
+            <Output name="value" value=""/>
+        </Step>
+    </Steps>
+</Task>

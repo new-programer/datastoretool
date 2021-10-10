@@ -1,6 +1,5 @@
 package site.ericgao.xml.xmoperation.java;
 
-import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,7 +17,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Formatter;
-import java.util.Objects;
 
 /**
  * @Project advanced
@@ -35,16 +33,20 @@ public class XmlDomParse {
     private static final Formatter FORMATTER = new Formatter(System.out);
 
     public static void main(String[] args) {
-        String filename = "table.pdm";
-        String nodeName = "o:Table";
+//        String filename = "table.pdm";
+//        String nodeName = "o:Table";
+
+        String filename = "BaseGet.xml";
+        String nodeName = "Task";
         XmlDomParse xmlDomParse = new XmlDomParse();
         Document document = xmlDomParse.domParse(filename);
-        xmlDomParse.analyzeNode(document,nodeName);
+        xmlDomParse.analyzeNode(document, nodeName);
         FORMATTER.close();
     }
 
     /**
      * 节点解析
+     *
      * @param document 接收Node类型的实例对象 多态！！！
      * @param nodeName 要解析的节点名
      */
@@ -54,16 +56,16 @@ public class XmlDomParse {
         //获取 所有 标签名 为 nodeName 的 所有元素
         NodeList elements = document.getElementsByTagName(nodeName);
         //判断是否是元素节点，如果是元素节点就直接输出
-        if (elements.getLength() == 0){
+        if (elements.getLength() == 0) {
             System.err.format("不存在 标签名为{%s}的元素：", nodeName);
-        }else{
+        } else {
             //遍历子节点集合
             for (int i = 0; i < elements.getLength() && visitContinueFlag; i++) {
                 //获取其中的一个子节点
                 Node child = elements.item(i);
 
                 // 过滤掉 pdm文件 中不符合要求的node
-                if(child.getAttributes() == null || child.getAttributes().getNamedItem("Id") == null) {
+                if (child.getAttributes() == null || child.getAttributes().getNamedItem("Id") == null) {
                     continue;
                 }
                 visitContinueFlag = false;
@@ -82,26 +84,27 @@ public class XmlDomParse {
      * node.getNodeValue() = 主键
      * node.getNodeName() = a:TotalSavingCurrency
      * node.getNodeValue() = null
-     *
+     * <p>
      * 若 node.getChildNodes().getLength() == 1 表示 该node为非父节点，其只含值，嵌套子节点，
      * 通过 node.getFirstChild().getNodeValue() 或 node.getTextContent()获取其 值内容
+     *
      * @param node
      */
     private void list(Node node) {
         //判断是否是元素节点，如果是元素节点就直接输出
-        if (node.getChildNodes().getLength() == 1){
-            if ("a:ObjectID".equals(node.getNodeName())){
+        if (node.getChildNodes().getLength() == 1) {
+            if ("a:ObjectID".equals(node.getNodeName())) {
                 System.out.println("------------------------ ****** -------------------------");
             }
-            if (node.getParentNode().getParentNode().getParentNode() != null){
+            if (node.getParentNode().getParentNode().getParentNode() != null) {
                 FORMATTER.format("[%s --> %s --> %s]:[%s --> %s] \n",
                         node.getParentNode().getParentNode().getParentNode().getNodeName(),
                         node.getParentNode().getParentNode().getNodeName(), node.getParentNode().getNodeName(),
                         node.getNodeName(), node.getFirstChild().getNodeValue());
-            } else if (node.getParentNode().getParentNode() != null){
+            } else if (node.getParentNode().getParentNode() != null) {
                 FORMATTER.format("[%s --> %s]:[%s --> %s] \n", node.getParentNode().getParentNode().getNodeName(),
                         node.getParentNode().getNodeName(), node.getNodeName(), node.getFirstChild().getNodeValue());
-            }else if (node.getParentNode() != null){
+            } else if (node.getParentNode() != null) {
                 FORMATTER.format("[%s]:[%s --> %s] \n", node.getParentNode().getNodeName(), node.getNodeName(),
                         node.getFirstChild().getNodeValue());
             }
@@ -119,6 +122,7 @@ public class XmlDomParse {
 
     /**
      * 解析 xml 结构文件
+     *
      * @param filename 文件全路径名
      * @return 解析后 生成对应的 Document 对象
      */
@@ -141,13 +145,14 @@ public class XmlDomParse {
 
     /**
      * 增加 新 元素
-     * @param document xml 文档实例
+     *
+     * @param document      xml 文档实例
      * @param parentTagName 父节点名
-     * @param tagName 元素名
-     * @param content 元素内容
-     * @param filename document 对应的文件名
+     * @param tagName       元素名
+     * @param content       元素内容
+     * @param filename      document 对应的文件名
      */
-    private void add(Document document, String parentTagName,String tagName, String content,String filename){
+    private void add(Document document, String parentTagName, String tagName, String content, String filename) {
         //创建需要增加的节点
         try {
             Element element = document.createElement(tagName);
@@ -166,7 +171,7 @@ public class XmlDomParse {
             //获取转换器对象
             Transformer transformer = transformerFactory.newTransformer();
             //把内存中的Dom树更新到硬盘中
-            transformer.transform(new DOMSource(document),new StreamResult(filename));
+            transformer.transform(new DOMSource(document), new StreamResult(filename));
         } catch (TransformerException e) {
             e.printStackTrace();
         }
@@ -174,11 +179,12 @@ public class XmlDomParse {
 
     /**
      * 删除节点
+     *
      * @param document
-     * @param tagName 要删除的节点名称
+     * @param tagName  要删除的节点名称
      * @param filename document 对应的文件名
      */
-    private void delete(Document document, String tagName, String filename){
+    private void delete(Document document, String tagName, String filename) {
         try {
             //获取到beijing这个节点
             Node node = document.getElementsByTagName(tagName).item(0);
@@ -195,11 +201,12 @@ public class XmlDomParse {
 
     /**
      * 修改 元素 的值
+     *
      * @param document
-     * @param tagName 元素名
+     * @param tagName  元素名
      * @param filename document 对应的 xml 结构文档名
      */
-    private void update(Document document, String tagName, String newContent, String filename){
+    private void update(Document document, String tagName, String newContent, String filename) {
         try {
             //获取到 tagName 节点
             Node node = document.getElementsByTagName(tagName).item(0);
@@ -216,7 +223,7 @@ public class XmlDomParse {
 
 
     private static void updateAttribute(Document document, String tagName,
-                                        String[] attributes, String[] attributeValues, String filename){
+                                        String[] attributes, String[] attributeValues, String filename) {
         try {
             //获取到 tagName 节点
             Node node = document.getElementsByTagName(tagName).item(0);
